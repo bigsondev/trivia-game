@@ -2,6 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const initialState = {
   data: [],
+  userAnswers: [],
+  currentQuestionIndex: 0,
+  stage: 'NOT_STARTED',
+
   isLoading: false,
   isError: false,
 };
