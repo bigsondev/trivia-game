@@ -1,18 +1,24 @@
-import { useEffect } from 'react';
+import { StrictMode, Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import { ErrorBoundary } from './ErrorBoundary';
+
+const Home = lazy(() => import('./modules/Home'));
+const Quiz = lazy(() => import('./modules/Quiz'));
 
 export const App = () => {
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        'https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean',
-      );
-      const data = await response.json();
-
-      console.log('DATA: ', data);
-    };
-
-    fetchData();
-  }, []);
-
-  return <div>Hello new boilerplate</div>;
+  return (
+    <StrictMode>
+      <ErrorBoundary>
+        <Router>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/quiz" component={Quiz} />
+            </Switch>
+          </Suspense>
+        </Router>
+      </ErrorBoundary>
+    </StrictMode>
+  );
 };
