@@ -20,7 +20,10 @@
     "noEmit": true,
     "baseUrl": "./",
     "paths": {
-      "@components": ["src/components"]
+      "@api": ["src/api"],
+      "@components": ["src/components"],
+      "@modules/*": ["src/modules/*"],
+      "@store": ["src/store"]
     },
     "jsx": "react-jsx"
   },

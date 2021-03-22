@@ -1,24 +1,24 @@
-import { StrictMode, Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { StrictMode, Suspense } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-import { ErrorBoundary } from '@components';
+import { store } from '@store';
 
-const Home = lazy(() => import('./modules/Home'));
-const Quiz = lazy(() => import('./modules/Quiz'));
+import { ErrorBoundary } from './ErrorBoundary';
+import { Routes } from './Routes';
 
 export const App = () => {
   return (
     <StrictMode>
-      <ErrorBoundary>
-        <Router>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/quiz" component={Quiz} />
-            </Switch>
-          </Suspense>
-        </Router>
-      </ErrorBoundary>
+      <Provider store={store}>
+        <ErrorBoundary>
+          <Router>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Routes />
+            </Suspense>
+          </Router>
+        </ErrorBoundary>
+      </Provider>
     </StrictMode>
   );
 };

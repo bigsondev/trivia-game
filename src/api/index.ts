@@ -1,0 +1,1 @@
+export { fetchQuizData } from './api';
