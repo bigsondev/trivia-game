@@ -1,1 +1,1 @@
-export { fetchQuizData } from './api';
+export * from './api';

@@ -1,10 +1,21 @@
-import { call, takeEvery, put } from 'redux-saga/effects';
+import { call, takeEvery, put, StrictEffect } from 'redux-saga/effects';
+
+import { fetchQuizData, IQuizData } from '@api';
 
 import { quizActions } from './quizSlice';
 
-export function* fetchDataSaga(): Generator<string, void, boolean> {
+const transformQuizData = ({ results }: IQuizData) =>
+  results.map(({ category, question, correct_answer }) => ({
+    category,
+    question,
+    answer: correct_answer === 'True' ? true : false,
+  }));
+
+export function* fetchDataSaga(): Generator<StrictEffect, void, any> {
   try {
-    yield '5';
+    const data: IQuizData = yield call(fetchQuizData);
+
+    yield put(quizActions.fetchSuccess(transformQuizData(data)));
   } catch (e) {}
 }
 
