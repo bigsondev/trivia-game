@@ -1,7 +1,7 @@
 import { StrictMode, Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { ErrorBoundary } from './ErrorBoundary';
+import { ErrorBoundary } from '@components';
 
 const Home = lazy(() => import('./modules/Home'));
 const Quiz = lazy(() => import('./modules/Quiz'));
