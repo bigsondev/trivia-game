@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
+    "lib": ["es2020", "dom", "ESNext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
