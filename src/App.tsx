@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { CssBaseline } from '@material-ui/core';
 
 import { store } from '@store';
+import { LoadingIndicator } from '@components';
 
 import { ErrorBoundary } from './ErrorBoundary';
 import { Layout } from './Layout';
@@ -13,17 +14,17 @@ export const App = () => {
   return (
     <StrictMode>
       <Provider store={store}>
-        <CssBaseline>
-          <ErrorBoundary>
-            <Router>
-              <Suspense fallback={<div>Loading...</div>}>
-                <Layout>
+        <Router>
+          <CssBaseline>
+            <Layout>
+              <ErrorBoundary>
+                <Suspense fallback={<LoadingIndicator />}>
                   <Routes />
-                </Layout>
-              </Suspense>
-            </Router>
-          </ErrorBoundary>
-        </CssBaseline>
+                </Suspense>
+              </ErrorBoundary>
+            </Layout>
+          </CssBaseline>
+        </Router>
       </Provider>
     </StrictMode>
   );

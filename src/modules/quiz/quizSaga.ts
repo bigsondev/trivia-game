@@ -1,13 +1,14 @@
 import { call, takeEvery, put, StrictEffect } from 'redux-saga/effects';
+import he from 'he';
 
 import { fetchQuizData, IQuizData } from '@api';
 
-import { quizActions } from './quizSlice';
+import { quizActions, TQuestion } from './quizSlice';
 
-const transformQuizData = ({ results }: IQuizData) =>
+const transformQuizData = ({ results }: IQuizData): TQuestion[] =>
   results.map(({ category, question, correct_answer }) => ({
-    category,
-    question,
+    category: he.decode(category),
+    question: he.decode(question),
     answer: correct_answer === 'True' ? true : false,
   }));
 

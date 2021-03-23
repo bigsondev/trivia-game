@@ -1,5 +1,7 @@
 import { Component, ReactNode, ErrorInfo } from 'react';
 
+import { Heading, Typography, Button } from '@components';
+
 interface IErrorBoundaryProps {
   children: ReactNode;
 }
@@ -16,6 +18,10 @@ export class ErrorBoundary extends Component<
     hasError: false,
   };
 
+  private handleRefreshClick = () => {
+    window.location.reload();
+  };
+
   public static getDerivedStateFromError(error: Error) {
     return { hasError: true };
   }
@@ -29,7 +35,22 @@ export class ErrorBoundary extends Component<
     const { hasError } = this.state;
 
     if (hasError) {
-      return <h1>Something went wrong.</h1>;
+      return (
+        <>
+          <Heading>Woops 🙈</Heading>
+          <Typography align="center" variant="body2" gutterBottom>
+            Something went wrong on our end, the below button is not AZ-5, what
+            could go wrong...
+          </Typography>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={this.handleRefreshClick}
+          >
+            Refresh
+          </Button>
+        </>
+      );
     }
 
     return children;

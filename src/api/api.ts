@@ -17,7 +17,7 @@ export interface IQuizData {
   results: TQuizResult[];
 }
 
-export const fetchQuizData = async () => {
+export const fetchQuizData = async (): Promise<IQuizData> => {
   const response = await fetch(
     'https://opentdb.com/api.php?amount=10&difficulty=hard&type=boolean',
   );

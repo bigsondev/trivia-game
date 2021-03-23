@@ -1,58 +1,33 @@
+import { useAppSelector, useFetching } from '@store';
+import { LoadingIndicator } from '@components';
+
+import { QuizPlaying } from './QuizPlaying';
+import { QuizFinished } from './QuizFinished';
 import {
-  Box,
-  Grid,
-  Typography,
-  Button,
-  LinearProgress,
-} from '@material-ui/core';
-
-import { useFetching } from '@store';
-import { Heading } from '@components';
-
+  fetchingSelector,
+  quizStageSelector,
+  TQuizStage,
+} from './quizSelectors';
 import { quizActions } from './quizSlice';
 
+const mapStageToQuizComponent: Record<TQuizStage, JSX.Element> = {
+  playing: <QuizPlaying />,
+  finished: <QuizFinished />,
+};
+
 export const Quiz = () => {
+  const { isLoading, isError } = useAppSelector(fetchingSelector);
+  const quizStage = useAppSelector(quizStageSelector);
+
   useFetching(quizActions.fetch);
 
-  return (
-    <Box
-      height="100%"
-      display="flex"
-      flexDirection="column"
-      justifyContent="space-between"
-      alignItems="center"
-    >
-      <div>
-        <Heading>Entertainment: Video Games</Heading>
-        <Box mt="0.5rem">
-          <LinearProgress variant="determinate" value={0} />
-        </Box>
-      </div>
-      <Box
-        border="1px solid black"
-        height="25vh"
-        padding="2rem"
-        display="flex"
-        justifyContent="center"
-        flexDirection="column"
-      >
-        <Typography variant="body1" align="center" paragraph>
-          Unturned originally started as a Roblox game.
-        </Typography>
-        <Grid container justify="center" spacing={2}>
-          <Grid item>
-            <Button variant="contained" color="primary">
-              YES
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button variant="contained" color="secondary">
-              NO
-            </Button>
-          </Grid>
-        </Grid>
-      </Box>
-      <div />
-    </Box>
-  );
+  if (isLoading) {
+    return <LoadingIndicator />;
+  }
+
+  if (isError) {
+    throw new Error('Failed fetching data from the API');
+  }
+
+  return mapStageToQuizComponent[quizStage];
 };
