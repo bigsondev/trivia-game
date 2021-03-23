@@ -35,7 +35,7 @@ yarn build
 
 ## Testing
 
-Jest is used to test business logic (sagas, reducers, selectors, transformation functions). To run tests locally, do the below command.
+Jest is used to test business logic (sagas, reducers, transformation/utils functions). To run tests locally, do the below commands.
 
 ```
 yarn test

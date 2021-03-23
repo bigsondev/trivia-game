@@ -5,7 +5,7 @@ import { fetchQuizData, IQuizData } from '@api';
 
 import { quizActions, TQuestion } from './quizSlice';
 
-const transformQuizData = ({ results }: IQuizData): TQuestion[] =>
+export const transformQuizData = ({ results }: IQuizData): TQuestion[] =>
   results.map(({ category, question, correct_answer }) => ({
     category: he.decode(category),
     question: he.decode(question),
@@ -17,7 +17,9 @@ export function* fetchDataSaga(): Generator<StrictEffect, void, any> {
     const data: IQuizData = yield call(fetchQuizData);
 
     yield put(quizActions.fetchSuccess(transformQuizData(data)));
-  } catch (e) {}
+  } catch (e) {
+    yield put(quizActions.fetchFailure());
+  }
 }
 
 export function* quizSaga() {

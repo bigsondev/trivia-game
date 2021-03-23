@@ -23,7 +23,7 @@ export const QuizFinished = () => {
       <Heading>
         You scored <br /> {quizScore}/10
       </Heading>
-      <Box overflow="auto" maxHeight="55vh">
+      <Box overflow="hidden auto" maxHeight="55vh">
         <Grid container spacing={1}>
           {questions.map(({ question, answer }, index) => {
             const userAnswer = userAnswers[index];

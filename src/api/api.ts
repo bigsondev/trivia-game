@@ -1,7 +1,7 @@
-type TResponseCode = 0 | 1 | 2 | 3 | 4;
-type TAnswer = 'True' | 'False';
-type TAnswerType = 'boolean';
-type TAnswerDifficulty = 'easy' | 'medium' | 'hard';
+export type TResponseCode = 0 | 1 | 2 | 3 | 4;
+export type TAnswer = 'True' | 'False';
+export type TAnswerType = 'boolean';
+export type TAnswerDifficulty = 'easy' | 'medium' | 'hard';
 
 type TQuizResult = {
   category: string;
