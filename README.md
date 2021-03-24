@@ -2,11 +2,11 @@
 
 ## Structure
 
-/public -> static assets, index.html only
-/src/api -> Communication with Open Trivia DB
-/src/components -> Reusable components, mostly based on MUI
-/src/modules -> Feature like architecture, home, and quiz
-/src/store -> Redux state management
+- /public -> static assets, index.html only
+- /src/api -> Communication with Open Trivia DB
+- /src/components -> Reusable components, mostly based on MUI
+- /src/modules -> Feature like architecture, home, and quiz
+- /src/store -> Redux state management
 
 ## Installation
 
