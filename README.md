@@ -1,5 +1,7 @@
 # trivia-game
 
+This project is a challenge solution for g2i task.
+
 ## Structure
 
 /public -> static assets, index.html only
